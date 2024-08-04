@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Insurance Charge Prediction</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Insurance Charge Prediction</h1>
+        <form action="/predict" method="post">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required><br>
+            <label for="sex">Sex:</label>
+            <select id="sex" name="sex" required>
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+            </select><br>
+            <label for="bmi">BMI:</label>
+            <input type="number" step="0.1" id="bmi" name="bmi" required><br>
+            <label for="children">Number of Children:</label>
+            <input type="number" id="children" name="children" required><br>
+            <label for="smoker">Smoker:</label>
+            <select id="smoker" name="smoker" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select><br>
+            <label for="region">Region:</label>
+            <select id="region" name="region" required>
+                <option value="0">Northeast</option>
+                <option value="1">Northwest</option>
+                <option value="2">Southeast</option>
+                <option value="3">Southwest</option>
+            </select><br>
+            <input type="hidden" name="region_northwest" value="0">
+            <input type="hidden" name="region_southeast" value="0">
+            <input type="hidden" name="region_southwest" value="0">
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction_text %}
+            <h2>{{ prediction_text }}</h2>
+        {% endif %}
+    </div>
+</body>
+</html>
